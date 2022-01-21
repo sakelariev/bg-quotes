@@ -1,7 +1,7 @@
 from dash import Dash, callback, html, dcc, dash_table, Input, Output, State, MATCH, ALL
 import dash_bootstrap_components as dbc
 
-from app import app
+from app import app, server
 from apps import page1
 
 
