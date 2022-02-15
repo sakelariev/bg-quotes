@@ -41,11 +41,11 @@ app.layout = html.Div([
         dcc.Location(id='url', refresh=False),
         dbc.NavbarSimple(
         children=[
-            dbc.NavItem(dbc.NavLink("Конвертирай в български кавички", href="/apps/page-1", id='page1-link')),
+            # dbc.NavItem(dbc.NavLink("Конвертирай в български кавички", href="/apps/page-1", id='page1-link')),
             # dbc.NavItem(dbc.NavLink("Page 2", href="/apps/page-2", id='google-link')),
             # dbc.NavItem(dbc.NavLink("Page 3", href="/apps/page-3", id='table-link')),
         ],
-        brand="PR writing assistant",
+        brand="Writing assistant",
         color="#FFC04E",
         dark=False,
         id = "navbar-index",

@@ -15,8 +15,15 @@ layout = dbc.Container([
     dbc.Col([
     ], md=1), 
     dbc.Col([
-    html.Div(html.Img(src='/assets/hand.jpg',  style={ 'height': '300px'}), style={'display': 'flex', 'justify-content': 'center'}),
-            ], md=10),
+    html.Div(html.Img(src='/assets/hand.jpg',  style={ 'height': '300px'}), style={'display': 'flex', 'justify-content': 'right'}),
+            ], md=5),
+    dbc.Col([
+    html.Div(dcc.Markdown('''
+    **Автоматизирай корекцията на следните правила:**
+    * Конвертирай английски(" ") в български кавички („ “)
+    * Преобразувай й в ѝ
+    * Преобразувай малко (-) в голямо (–) тире
+        '''), style={'display': 'flex', 'justify-content': 'left'})], md=5),
     dbc.Col([
     ], md=1) 
     ], align="center", 
@@ -25,7 +32,7 @@ layout = dbc.Container([
     
     dbc.Row([
     dbc.Col([
-    ], md=2), 
+    ], md=1), 
     dbc.Col([
     html.Div(
     dcc.Textarea(
@@ -33,12 +40,12 @@ layout = dbc.Container([
         value='Конвертирай английски в български кавички - " "',
         maxLength='5000',
         style={'width': '100%', 'height': 400, 'padding': '15px', 'resize' : 'none', 'border-radius': '10px', 'whiteSpace': 'pre-line', 'padding-bottom': '40px',})),
-            ], md=4),
+            ], md=5),
     dbc.Col([
     dcc.Textarea(id='textarea-output', readOnly=True, style={'height': 400, 'width': '100%', 'backgroundColor': '#EBF3FE',  'padding': '15px', 'resize' : 'none', 'border-radius': '10px'}),
-            ], md=4), 
+            ], md=5), 
     dbc.Col([
-    ], md=2), 
+    ], md=1), 
         ], align="center", 
         style={ "margin-top": "5px", "margin-bottom": "0px"}
         ),
@@ -70,8 +77,7 @@ def update_output(value):
 )
 def update_output(value):
     replaced_value = re.sub(r'\"(.*?)\"', r'„\1“', value)
-    return replaced_value
+    replaced_i = replaced_value.replace(" й ", " ѝ ")
+    change_hypen = replaced_i.replace(" - ", " – ")
+    return change_hypen
 
-
-if __name__ == '__main__':
-    app.run_server(debug=True)
