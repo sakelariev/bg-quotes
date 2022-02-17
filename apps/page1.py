@@ -38,7 +38,7 @@ layout = dbc.Container([
     dcc.Textarea(
         id='textarea-wrong-quotes',
         value='Конвертирай английски в български кавички - " "',
-        maxLength='5000',
+        maxLength='10000',
         style={'width': '100%', 'height': 400, 'padding': '15px', 'resize' : 'none', 'border-radius': '10px', 'whiteSpace': 'pre-line', 'padding-bottom': '40px',})),
             ], md=5),
     dbc.Col([
@@ -68,7 +68,7 @@ layout = dbc.Container([
 )
 def update_output(value):
     number_characters = len(value)
-    return '{} / 5000'.format(number_characters)
+    return '{} / 10,000'.format(number_characters)
     
 # Replace all wrong style quotes to Bulgarian style quotes
 @app.callback(
