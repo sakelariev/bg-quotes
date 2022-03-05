@@ -63,10 +63,10 @@ app.layout = html.Div([
 def display_page(pathname):
     if pathname == '/apps/page-1':
         return page1.layout
-    elif pathname == '/apps/page-2':
-        return page2.layout
-    elif pathname == '/apps/page-3':
-        return page3.layout
+    # elif pathname == '/apps/page-2':
+    #     return page2.layout
+    # elif pathname == '/apps/page-3':
+    #     return page3.layout
     elif pathname == '/':
         return page1.layout
     else:
@@ -85,4 +85,4 @@ def display_page(pathname):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=False, host = '127.0.0.1')
+    app.run_server(debug=False, port=8080)

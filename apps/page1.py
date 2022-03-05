@@ -77,6 +77,7 @@ def update_output(value):
 )
 def update_output(value):
     replaced_value = re.sub(r'\"(.*?)\"', r'„\1“', value)
+    replaced_value = re.sub(r'\“(.*?)\”', r'„\1“', replaced_value)
     replaced_i = replaced_value.replace(" й ", " ѝ ")
     change_hypen = replaced_i.replace(" - ", " – ")
     return change_hypen
