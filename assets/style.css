@@ -1,10 +1,17 @@
 #textarea-output {
     border-radius: 10px 10px 10px 10px!important;
+    font-weight: 300;
+    border-width: 1px;
+    border-style: solid;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
+    padding: 2px;
     font-family: system-ui;
 }
 
 #textarea-wrong-quotes {
     border-radius: 10px 10px 10px 10px!important;
+    font-weight: 300;
     font-family: system-ui;
 }
 
@@ -32,3 +39,4 @@
   margin-top: 4rem;
   text-align: center;
 }
+

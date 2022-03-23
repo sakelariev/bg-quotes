@@ -8,6 +8,39 @@ import re
 # Multipage imports
 from app import app
 
+
+# Try to highlight the string values
+def entbox(children):
+    return html.Mark(children, style={
+        "background": "#FFC04E",
+        "padding": "0.25em 0.25em",
+        "margin": "0 0.15em",
+        "line-height": "1",
+        "border-radius": "0.25em",
+    })
+
+
+def entity(children):
+    if type(children) is str:
+        children = [children]
+    return entbox(children)
+
+
+def render(string):
+    children = []
+    last_idx = 0
+    for match in re.finditer(r'\„(.*?)\“|\"(.*?)\"|ѝ|–', string):
+        start_char = match.start()
+        end_char = match.end()
+        children.append(string[last_idx:start_char])
+        children.append(entity(string[start_char:end_char]))
+        last_idx = end_char
+    children.append(string[last_idx:])
+    return children
+
+
+
+
 layout = dbc.Container([
     
     
@@ -19,7 +52,7 @@ layout = dbc.Container([
             ], md=5),
     dbc.Col([
     html.Div(dcc.Markdown('''
-    **Автоматизирай корекцията на следните правила:**
+    **Автоматизирай следните правила:**
     * Конвертирай английски(" ") в български кавички („ “)
     * Преобразувай й в ѝ
     * Преобразувай малко (-) в голямо (–) тире
@@ -38,11 +71,13 @@ layout = dbc.Container([
     dcc.Textarea(
         id='textarea-wrong-quotes',
         value='Конвертирай английски в български кавички - " "',
-        maxLength='10000',
-        style={'width': '100%', 'height': 400, 'padding': '15px', 'resize' : 'none', 'border-radius': '10px', 'whiteSpace': 'pre-line', 'padding-bottom': '40px',})),
+        maxLength='40000',
+        style={'width': '100%', 'height': 400, 'padding': '15px', 'resize' : 'none', 'border-radius': '10px', 'whiteSpace': 'pre-line', 'padding-bottom': '40px',}),
+        style={'padding-top': '10px'}),
             ], md=5),
     dbc.Col([
-    dcc.Textarea(id='textarea-output', readOnly=True, style={'height': 400, 'width': '100%', 'backgroundColor': '#EBF3FE',  'padding': '15px', 'resize' : 'none', 'border-radius': '10px'}),
+    html.Div(id='textarea-output', style={'height': 400, 'width': '100%', 'backgroundColor': '#EBF3FE',  'padding': '15px', 'resize' : 'none', 'border-radius': '10px', 'whiteSpace': 'pre-line'}),
+    # dcc.Textarea(id='textarea-output', readOnly=True, style={'height': 400, 'width': '100%', 'backgroundColor': '#EBF3FE',  'padding': '15px', 'resize' : 'none', 'border-radius': '10px'}),
             ], md=5), 
     dbc.Col([
     ], md=1), 
@@ -68,11 +103,11 @@ layout = dbc.Container([
 )
 def update_output(value):
     number_characters = len(value)
-    return '{} / 10,000'.format(number_characters)
+    return '{} / 40,000'.format(number_characters)
     
 # Replace all wrong style quotes to Bulgarian style quotes
 @app.callback(
-    Output('textarea-output', 'value'),
+    Output('textarea-output', 'children'),
     Input('textarea-wrong-quotes', 'value')
 )
 def update_output(value):
@@ -80,5 +115,6 @@ def update_output(value):
     replaced_value = re.sub(r'\“(.*?)\”', r'„\1“', replaced_value)
     replaced_i = replaced_value.replace(" й ", " ѝ ")
     change_hypen = replaced_i.replace(" - ", " – ")
-    return change_hypen
+    children=render(change_hypen)
+    return children
 
