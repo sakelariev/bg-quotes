@@ -76,7 +76,7 @@ layout = dbc.Container([
         style={'padding-top': '10px'}),
             ], md=5),
     dbc.Col([
-    html.Div(id='textarea-output', style={'height': 400, 'width': '100%', 'backgroundColor': '#EBF3FE',  'padding': '15px', 'resize' : 'none', 'border-radius': '10px', 'whiteSpace': 'pre-line'}),
+    html.Div(id='textarea-output', style={'height': 400, 'width': '100%', 'backgroundColor': '#EBF3FE',  'padding': '15px', 'resize' : 'none', 'border-radius': '10px', 'whiteSpace': 'pre-line', 'overflow':'scroll', 'overflow-x': 'hidden'}),
     # dcc.Textarea(id='textarea-output', readOnly=True, style={'height': 400, 'width': '100%', 'backgroundColor': '#EBF3FE',  'padding': '15px', 'resize' : 'none', 'border-radius': '10px'}),
             ], md=5), 
     dbc.Col([
@@ -118,3 +118,5 @@ def update_output(value):
     children=render(change_hypen)
     return children
 
+# Code to capture only quotes - figure out how to use it 
+#  r'(„).*?(“)'
