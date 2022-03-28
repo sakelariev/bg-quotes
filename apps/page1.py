@@ -48,7 +48,7 @@ layout = dbc.Container([
     dbc.Col([
     ], md=1), 
     dbc.Col([
-    html.Div(html.Img(src='/assets/hand.jpg',  style={ 'height': '300px'}), style={'display': 'flex', 'justify-content': 'right'}),
+    html.Div(html.Img(src='/assets/hand.jpg',  style={ 'height': '300px'}), style={'display': 'flex', 'justify-content': 'flex-end'}),
             ], md=5),
     dbc.Col([
     html.Div(dcc.Markdown('''
