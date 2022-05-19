@@ -40,3 +40,14 @@
   text-align: center;
 }
 
+#copy {
+  transition: 200ms;
+  transition-timing-function: ease-in-out;
+  -webkit-transition: 200ms;
+  -webkit-transition-timing-function: ease-in-out;
+}
+
+#copy:hover{
+  color: #FFC04E;
+  cursor: pointer;
+}

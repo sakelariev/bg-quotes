@@ -85,7 +85,16 @@ layout = dbc.Container([
         style={'padding-top': '10px'}),
             ], md=5),
     dbc.Col([
+    html.Div([
+        
     html.Div(id='textarea-output', style={'height': 400, 'width': '100%', 'backgroundColor': '#EBF3FE',  'padding': '15px', 'resize' : 'none', 'border-radius': '10px', 'whiteSpace': 'pre-line', 'overflow-y':'auto', 'overflow-x': 'hidden'}),
+    dcc.Clipboard(
+        target_id="textarea-output",
+        id="copy",
+        style={"position": "absolute","top": 7,"right": 7,"fontSize": 20},
+    ),
+    
+    ], style={"position": "relative"},)
     # dcc.Textarea(id='textarea-output', readOnly=True, style={'height': 400, 'width': '100%', 'backgroundColor': '#EBF3FE',  'padding': '15px', 'resize' : 'none', 'border-radius': '10px'}),
             ], md=5), 
     dbc.Col([
@@ -129,14 +138,22 @@ def update_output(value):
 
 
 
-# app.clientside_callback(
-#     """
-#     function(n_clicks) {
-#         if (n_clicks > 0)
-#             document.querySelector("#pages-content-de button.export").click()
-#         return ""
-#     }
-#     """,
-#     Output("export_german_page", "data-dummy"),
-#     [Input("export_german_page", "n_clicks")]
+# @app.callback(
+#     Output("copy", "content"),
+#     Input("copy", "n_clicks"),
+#     State("textarea-output", "children"),
 # )
+# def custom_copy(_, text):
+#     end_text = []
+#     for element in text:
+#         print(element)
+#         if type(element) is str:
+#             end_text.append(element)
+#         elif type(element) is dict:
+#             edited_element = element['props']['children'][0]
+#             end_text.append(edited_element)
+#     end_string = ''.join(end_text)
+#     print(end_string)
+#     return end_string
+    
+    

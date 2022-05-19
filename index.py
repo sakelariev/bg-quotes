@@ -52,7 +52,7 @@ app.layout = html.Div([
         brand_href="/",
     ),
         html.Div(id='page-content'),
-        html.Div(html.P("2022 © Авторът на този уебсайт го създаде, за да може приятелката му да не губи време, копирайки ръчно българските кавички", id='footer'), id='footer_container'),
+        html.Div(html.P("2022 © Авторът на този уебсайт го създаде, за да може приятелката му да не губи време в ръчно копиране на кавички", id='footer'), id='footer_container'),
         
     ])
 
