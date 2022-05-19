@@ -13,10 +13,10 @@ from app import app
 def entbox(children):
     return html.Mark(children, style={
         "background": "#FFC04E",
-        "padding": "0.25em 0.25em",
-        "margin": "0 0.15em",
+        "padding": "0.1em 0.05em 0.1em 0.05em",
+        # "margin": "0 0.15em",
         "line-height": "1",
-        "border-radius": "0.25em",
+        "border-radius": "0.15em",
     })
 
 
@@ -29,7 +29,16 @@ def entity(children):
 def render(string):
     children = []
     last_idx = 0
-    for match in re.finditer(r'\„(.*?)\“|\"(.*?)\"|ѝ|–', string):
+    # for match in re.finditer(r'(\„)(.*?)(\“)|(ѝ)|(–)', string):
+    for match in re.finditer(r'(„)|(“)|(ѝ)|(–)', string):
+        # selected_groups = match.groups()
+        # selected_groups = list(selected_groups)
+        # for i in range(len(selected_groups)):
+        #     if selected_groups[i] is None:
+        #         selected_groups[i] = ''
+        # selected_groups = selected_groups[:1] + selected_groups[2:]
+        # print(selected_groups.start())
+        # print(selected_groups.end())
         start_char = match.start()
         end_char = match.end()
         children.append(string[last_idx:start_char])
@@ -76,7 +85,7 @@ layout = dbc.Container([
         style={'padding-top': '10px'}),
             ], md=5),
     dbc.Col([
-    html.Div(id='textarea-output', style={'height': 400, 'width': '100%', 'backgroundColor': '#EBF3FE',  'padding': '15px', 'resize' : 'none', 'border-radius': '10px', 'whiteSpace': 'pre-line', 'overflow':'scroll', 'overflow-x': 'hidden'}),
+    html.Div(id='textarea-output', style={'height': 400, 'width': '100%', 'backgroundColor': '#EBF3FE',  'padding': '15px', 'resize' : 'none', 'border-radius': '10px', 'whiteSpace': 'pre-line', 'overflow-y':'auto', 'overflow-x': 'hidden'}),
     # dcc.Textarea(id='textarea-output', readOnly=True, style={'height': 400, 'width': '100%', 'backgroundColor': '#EBF3FE',  'padding': '15px', 'resize' : 'none', 'border-radius': '10px'}),
             ], md=5), 
     dbc.Col([
@@ -118,5 +127,16 @@ def update_output(value):
     children=render(change_hypen)
     return children
 
-# Code to capture only quotes - figure out how to use it 
-#  r'(„).*?(“)'
+
+
+# app.clientside_callback(
+#     """
+#     function(n_clicks) {
+#         if (n_clicks > 0)
+#             document.querySelector("#pages-content-de button.export").click()
+#         return ""
+#     }
+#     """,
+#     Output("export_german_page", "data-dummy"),
+#     [Input("export_german_page", "n_clicks")]
+# )
