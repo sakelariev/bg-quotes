@@ -63,24 +63,11 @@ app.layout = html.Div([
 def display_page(pathname):
     if pathname == '/apps/page-1':
         return page1.layout
-    # elif pathname == '/apps/page-2':
-    #     return page2.layout
-    # elif pathname == '/apps/page-3':
-    #     return page3.layout
     elif pathname == '/':
         return page1.layout
     else:
         return '404'
 
-# this callback uses the current pathname to set the active state of the
-# corresponding nav link to true, allowing users to tell see page they are on
-# Temporary using page-1, page-2 ,etc change to other values and figure out the function in that case
-# @app.callback(
-#     [Output(f"{i}-link", "active") for i in ['page-1', 'page-2', 'page-3']],
-#     [Input("url", "pathname")],
-# )
-# def toggle_active_links(pathname):
-#     return [pathname == f"/apps/{i}" for i in ['page-1', 'page-2', 'page-3']]
 
 
 
